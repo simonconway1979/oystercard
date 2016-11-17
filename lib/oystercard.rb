@@ -17,10 +17,6 @@ def top_up(amount)
   @balance += amount
 end
 
-def in_journey?
-  !!@entry_station
-end
-
 def touch_in(station)
   if @balance < MINIMUM_BALANCE
     fail("You do not have sufficient funds. Please top up your card.")

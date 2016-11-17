@@ -18,19 +18,27 @@ describe Journey do
       expect(journey).to respond_to(:in_journey?)
     end
 
-    # it "journey should initialize with an entry station" do
-    #   expect(subject.entry_station).to not_be nil
-    # end
+    it "journey should initialize with an entry station" do
+      expect(journey.entry_station).not_to be(nil)
+    end
 
-    # it "should be in a journey after touching in" do
-    #   allow(:card).to receive(:touch_in).and_return(:Hammersmith)
-    #   expect(subject.in_journey?).to be true
-    # end
+    it "should be in a journey after touching in" do
+      expect(journey.in_journey?).to be true
+    end
 
-    # it "should not be in a journey after touching out" do
-    #   subject.touch_out(station)
-    #   expect(subject.in_journey?).to be false
-    # end
+    it "should be able to touch out" do
+      expect(journey).to respond_to (:touch_out)
+    end
+
+    it "should not have an entry station after touch out" do
+      journey.touch_out
+      expect(journey.entry_station).to be(nil)
+    end
+
+    it "should not be in a journey after touching out" do
+      journey.touch_out
+      expect(journey.in_journey?).to be false
+    end
 
   end
 end
