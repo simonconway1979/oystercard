@@ -41,14 +41,37 @@ describe Journey do
     end
   end
 
+  context "moving touch in method into Journey" do
+
+    it "should respond to touch_in" do
+      expect(journey).to respond_to(:touch_in)
+    end
+
+    it "should create a new journey on touch in" do
+      expect(journey.touch_in).to be_a(Journey)
+    end
+
+  end
+
   context "moving exit station into journey class" do
 
     it "should respond to touch in with 1 argument" do
       expect(journey).to respond_to(:touch_out).with(1).argument
     end
+  end
+
+  context "fare method" do
 
     it "should respond to fare" do
       expect(journey).to respond_to(:fare)
     end
+
+    #it "should return minimum fare" do
+    #  expect(journey.fare).to eq Journey::MINIMUM_FARE
+    #end
+
+    #it "should return penalty fare if no entry station on touch out" do
+    #  expect(journey.touch_out("Bank")).to eq Journey::PENALTY_FARE
+    #end
   end
 end

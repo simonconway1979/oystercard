@@ -14,12 +14,14 @@ class Journey
     !@exit_station
   end
 
+
   def touch_out(exit_station)
     @exit_station = exit_station
   end
 
+
   def fare
-    
+    MINIMUM_FARE
   end
 
 end
