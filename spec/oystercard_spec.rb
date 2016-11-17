@@ -37,7 +37,7 @@ describe Oystercard do
 
     it "touching in should create an instance of Journey" do
       subject.top_up(10)
-      expect(subject.touch_in("Hammersmith")).to be(Journey.class)
+      expect(subject.touch_in("Hammersmith").class).to be(Journey)
     end
 
     it "should respond to 'touch out'" do

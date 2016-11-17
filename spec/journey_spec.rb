@@ -30,9 +30,9 @@ describe Journey do
       expect(journey).to respond_to (:touch_out)
     end
 
-    it "should not have an entry station after touch out" do
+    it "should have an exit station after touch out" do
       journey.touch_out("Bank")
-      expect(journey.entry_station).to be(nil)
+      expect(journey.exit_station).to eq("Bank")
     end
 
     it "should not be in a journey after touching out" do
@@ -46,8 +46,9 @@ describe Journey do
     it "should respond to touch in with 1 argument" do
       expect(journey).to respond_to(:touch_out).with(1).argument
     end
+
+    it "should respond to fare" do
+      expect(journey).to respond_to(:fare)
+    end
   end
-
-
-
 end
