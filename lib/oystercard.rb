@@ -15,16 +15,16 @@ def initialize
 end
 
 def top_up(amount)
-  fail "Top up too much. Maximum balance is £90. Current balance is #{@balance}" if @balance + amount > MAXIMUM_BALANCE
+  fail "Top up too much. Maximum balance is £#{MAXIMUM_BALANCE}. Current balance is £#{@balance}" if @balance + amount > MAXIMUM_BALANCE
   @balance += amount
 end
 
-def touch_in(station)
+def touch_in(entry_station)
   if @balance < MINIMUM_BALANCE
     fail("You do not have sufficient funds. Please top up your card.")
   else
-    record_entry(station)
-    @journey = Journey.new(station)
+    record_entry(entry_station)
+    @journey = Journey.new(entry_station)
   end
 end
 

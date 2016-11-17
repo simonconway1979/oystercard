@@ -14,13 +14,16 @@ class Journey
     !@exit_station
   end
 
-
   def touch_out(exit_station)
     @exit_station = exit_station
   end
 
+  def completed?
+    !!@exit_station
+  end
 
   def fare
+    return PENALTY_FARE if completed? == false
     MINIMUM_FARE
   end
 
