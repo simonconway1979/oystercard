@@ -68,14 +68,15 @@ describe Journey do
       expect(journey).to respond_to(:fare)
     end
 
-    it "should return minimum fare" do
-      journey.touch_in("Bank")
-      journey.touch_out("Hammersmith")
-      expect(journey.fare).to eq Journey::MINIMUM_FARE
+    it "should return penalty fare if no entry station on touch out" do
+      journey2 = Journey.new(nil)
+      journey2.touch_out("Hammersmith")
+      expect(journey2.fare).to eq Journey::PENALTY_FARE
     end
 
-    it "should return penalty fare if no entry station on touch out" do
-      expect(journey.touch_out("Bank")).to eq Journey::PENALTY_FARE
+    it "should return minimmum fare" do
+      journey.touch_out("Bank")
+      expect(journey.fare).to eq Journey::MINIMUM_FARE
     end
   end
 end
