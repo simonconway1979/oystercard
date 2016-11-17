@@ -31,14 +31,23 @@ describe Journey do
     end
 
     it "should not have an entry station after touch out" do
-      journey.touch_out
+      journey.touch_out("Bank")
       expect(journey.entry_station).to be(nil)
     end
 
     it "should not be in a journey after touching out" do
-      journey.touch_out
+      journey.touch_out("Bank")
       expect(journey.in_journey?).to be false
     end
-
   end
+
+  context "moving exit station into journey class" do
+
+    it "should respond to touch in with 1 argument" do
+      expect(journey).to respond_to(:touch_out).with(1).argument
+    end
+  end
+
+
+
 end

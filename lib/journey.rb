@@ -10,7 +10,7 @@ class Journey
     !!@entry_station
   end
 
-  def touch_out
+  def touch_out(exit_station)
     @entry_station = nil
   end
 

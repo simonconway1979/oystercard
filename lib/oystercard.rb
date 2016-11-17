@@ -21,14 +21,13 @@ def touch_in(station)
   if @balance < MINIMUM_BALANCE
     fail("You do not have sufficient funds. Please top up your card.")
   else
-    @entry_station = station
     record_entry(station)
+    @journey = Journey.new(station)
   end
 end
 
 def touch_out(station)
   record_exit(station)
-  @entry_station = nil
   deduct
 end
 

@@ -35,6 +35,11 @@ describe Oystercard do
       expect(subject).to respond_to(:touch_in)
     end
 
+    it "touching in should create an instance of Journey" do
+      subject.top_up(10)
+      expect(subject.touch_in("Hammersmith")).to be(Journey.class)
+    end
+
     it "should respond to 'touch out'" do
       expect(subject).to respond_to(:touch_out)
     end
@@ -70,16 +75,6 @@ describe Oystercard do
     subject.top_up(10)
     subject.touch_in(station)
   end
-
-
-    it "on touch in the station will be updated" do
-      expect(subject.entry_station).to eq station
-    end
-
-    it "on touch out the card will forget the station" do
-      expect{subject.touch_out(station)}.to change{subject.entry_station}.to(nil)
-    end
-
 
     it "should be able to see an updated journey history when we touch in" do
       expect(subject.journey_history["journey_1"]).to eq ({"entry"=>station})
