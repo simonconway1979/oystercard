@@ -2,7 +2,7 @@ require 'journey.rb'
 
 describe Journey do
 
-  let (:journey) { described_class.new("Hammersmith") }
+  subject(:journey) { described_class.new("Hammersmith") }
 
   it "should be a Journey object" do
     expect(journey).to be_a(Journey)
@@ -14,16 +14,9 @@ describe Journey do
 
   context "moving in_journey? method across from oystercard" do
 
-    it "should respond to 'in_journey'" do
-      expect(journey).to respond_to(:in_journey?)
-    end
 
     it "journey should initialize with an entry station" do
       expect(journey.entry_station).not_to be(nil)
-    end
-
-    it "should be in a journey after touching in" do
-      expect(journey.in_journey?).to be true
     end
 
     it "should be able to touch out" do
@@ -35,10 +28,6 @@ describe Journey do
       expect(journey.exit_station).to eq("Bank")
     end
 
-    it "should not be in a journey after touching out" do
-      journey.finish("Bank")
-      expect(journey.in_journey?).to be false
-    end
   end
 
   context "Journey reporting whether it is completed" do
@@ -93,16 +82,5 @@ describe Journey do
 
   end
 
-  context "recording the journeys (with set up)" do
-
-    it "should be able to see an updated journey history when we touch in" do
-      expect(journey.record_entry).to eq ({"entry"=>"Hammersmith"})
-    end
-
-    it " should be able to see the updated journey history when we touch out" do
-      expect(journey.finish(:station)).to eq ({"entry"=>"Hammersmith", "exit"=>:station})
-    end
-
-  end
 
 end

@@ -13,10 +13,6 @@ class Journey
     record_entry
   end
 
-  def in_journey?
-    !@exit_station
-  end
-
   def finish(exit_station)
     @exit_station = exit_station
     record_exit
@@ -32,13 +28,13 @@ class Journey
   end
 
   def record_entry
-    @history["journey_#{@counter}"] = { "entry" => @entry_station}
+   @history["journey_#{@counter}"] = { "entry" => @entry_station}
   end
 
   def record_exit
-    @history["journey_#{@counter}"].merge!({ "exit" => @exit_station})
-    @counter += 1
-    @history["journey_#{@counter-1}"]
+   @history["journey_#{@counter}"].merge!({ "exit" => @exit_station})
+   @counter += 1
+   @history["journey_#{@counter-1}"]
   end
 
 end
