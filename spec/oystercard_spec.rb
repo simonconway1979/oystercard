@@ -59,28 +59,4 @@ describe Oystercard do
     end
   end
 
-  context "Record the journeys" do
-
-    it "should be able to see journey history" do
-      expect(subject.journey_history).to eq({})
-    end
-
-
-  context "recording the journeys (with set up)" do
-
-  before(:each) do
-    subject.top_up(10)
-    subject.touch_in(station, journey)
-  end
-
-    it "should be able to see an updated journey history when we touch in" do
-      expect(subject.journey_history["journey_1"]).to eq ({"entry"=>station})
-    end
-
-    it " should be able to see the updated journey history when we touch out" do
-      subject.touch_out(station)
-      expect(subject.journey_history["journey_1"]).to eq ({"entry"=>station, "exit"=>station})
-    end
-  end
-  end
 end

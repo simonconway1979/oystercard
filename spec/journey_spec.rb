@@ -79,4 +79,31 @@ describe Journey do
       expect(journey.fare).to eq Journey::MINIMUM_FARE
     end
   end
+
+  context "Moving record_entry and record_exit over to Journey class" do
+
+    it "should repsond to record_entry" do
+      expect(journey).to respond_to(:record_entry)
+    end
+
+    it "should respond to record_exit"  do
+      expect(journey).to respond_to(:record_exit)
+    end
+
+  end
+
+  context "recording the journeys (with set up)" do
+
+    before(:each) do
+
+    end
+
+    it "should be able to see an updated journey history when we touch in" do
+      expect(journey.record_entry).to eq ({"entry"=>"Hammersmith"})
+    end
+
+    it " should be able to see the updated journey history when we touch out" do
+      expect(journey.finish(:station)).to eq ({"entry"=>"Hammersmith", "exit"=>:station})
+    end
+  end
 end
