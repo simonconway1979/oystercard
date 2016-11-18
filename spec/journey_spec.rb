@@ -52,7 +52,6 @@ describe Journey do
       expect(journey.completed?).to eq(true)
     end
 
-
   end
 
   context "moving exit station into journey class" do
@@ -60,6 +59,7 @@ describe Journey do
     it "should respond to touch in with 1 argument" do
       expect(journey).to respond_to(:finish).with(1).argument
     end
+
   end
 
   context "fare method" do
@@ -78,6 +78,7 @@ describe Journey do
       journey.finish("Bank")
       expect(journey.fare).to eq Journey::MINIMUM_FARE
     end
+
   end
 
   context "Moving record_entry and record_exit over to Journey class" do
@@ -94,10 +95,6 @@ describe Journey do
 
   context "recording the journeys (with set up)" do
 
-    before(:each) do
-
-    end
-
     it "should be able to see an updated journey history when we touch in" do
       expect(journey.record_entry).to eq ({"entry"=>"Hammersmith"})
     end
@@ -105,5 +102,7 @@ describe Journey do
     it " should be able to see the updated journey history when we touch out" do
       expect(journey.finish(:station)).to eq ({"entry"=>"Hammersmith", "exit"=>:station})
     end
+
   end
+
 end

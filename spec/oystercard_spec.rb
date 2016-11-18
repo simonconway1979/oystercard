@@ -1,10 +1,10 @@
 require "oystercard"
+require "journey"
 
 describe Oystercard do
 
   let(:station) { double :station }
   let(:journey) { double :journey, new: :journey_object }
-
 
 
   context "Create a basic Oystercard" do
@@ -26,7 +26,7 @@ describe Oystercard do
 
     it "should expect the balance to decrease when a fare is charged" do
       subject.top_up(20)
-      subject.touch_in(station, journey)
+      subject.touch_in(station, Journey)
       expect{subject.touch_out(station)}.to change{subject.balance}.by(-1)
     end
   end
@@ -51,7 +51,7 @@ describe Oystercard do
 
   before(:each) do
     subject.top_up(10)
-    subject.touch_in(station, journey)
+    subject.touch_in(station, Journey)
   end
 
     it "on touch out it should charge the card the minimum fare" do
