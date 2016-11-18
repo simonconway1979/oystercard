@@ -14,7 +14,7 @@ class Journey
     !@exit_station
   end
 
-  def touch_out(exit_station)
+  def finish(exit_station)
     @exit_station = exit_station
   end
 

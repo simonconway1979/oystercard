@@ -27,16 +27,16 @@ describe Journey do
     end
 
     it "should be able to touch out" do
-      expect(journey).to respond_to (:touch_out)
+      expect(journey).to respond_to (:finish)
     end
 
     it "should have an exit station after touch out" do
-      journey.touch_out("Bank")
+      journey.finish("Bank")
       expect(journey.exit_station).to eq("Bank")
     end
 
     it "should not be in a journey after touching out" do
-      journey.touch_out("Bank")
+      journey.finish("Bank")
       expect(journey.in_journey?).to be false
     end
   end
@@ -48,7 +48,7 @@ describe Journey do
     end
 
     it "should report that a journey is completed if it is completed" do
-      journey.touch_out("Bank")
+      journey.finish("Bank")
       expect(journey.completed?).to eq(true)
     end
 
@@ -58,7 +58,7 @@ describe Journey do
   context "moving exit station into journey class" do
 
     it "should respond to touch in with 1 argument" do
-      expect(journey).to respond_to(:touch_out).with(1).argument
+      expect(journey).to respond_to(:finish).with(1).argument
     end
   end
 
@@ -70,12 +70,12 @@ describe Journey do
 
     it "should return penalty fare if no entry station on touch out" do
       journey2 = Journey.new(nil)
-      journey2.touch_out("Hammersmith")
+      journey2.finish("Hammersmith")
       expect(journey2.fare).to eq Journey::PENALTY_FARE
     end
 
     it "should return minimmum fare" do
-      journey.touch_out("Bank")
+      journey.finish("Bank")
       expect(journey.fare).to eq Journey::MINIMUM_FARE
     end
   end

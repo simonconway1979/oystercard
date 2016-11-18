@@ -19,12 +19,12 @@ def top_up(amount)
   @balance += amount
 end
 
-def touch_in(entry_station)
+def touch_in(entry_station, journey_klass)
   if @balance < MINIMUM_BALANCE
     fail("You do not have sufficient funds. Please top up your card.")
   else
     record_entry(entry_station)
-    @journey = Journey.new(entry_station)
+    @journey = journey_klass.new(entry_station)
   end
 end
 

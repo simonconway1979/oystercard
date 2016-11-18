@@ -3,6 +3,8 @@ require "oystercard"
 describe Oystercard do
 
   let(:station) { double :station }
+  let(:journey) { double :journey, new: :journey_object }
+
 
 
   context "Create a basic Oystercard" do
@@ -24,7 +26,7 @@ describe Oystercard do
 
     it "should expect the balance to decrease when a fare is charged" do
       subject.top_up(20)
-      subject.touch_in(station)
+      subject.touch_in(station, journey)
       expect{subject.touch_out(station)}.to change{subject.balance}.by(-1)
     end
   end
@@ -35,18 +37,13 @@ describe Oystercard do
       expect(subject).to respond_to(:touch_in)
     end
 
-    it "touching in should create an instance of Journey" do
-      subject.top_up(10)
-      expect(subject.touch_in("Hammersmith").class).to be(Journey)
-    end
-
     it "should respond to 'touch out'" do
       expect(subject).to respond_to(:touch_out)
     end
 
     it "on touch in it should report an error
     when the balance is below the minimum amount" do
-    expect{ subject.touch_in(station) }.to raise_error("You do not have sufficient funds. Please top up your card.")
+    expect{ subject.touch_in(station, journey) }.to raise_error("You do not have sufficient funds. Please top up your card.")
     end
   end
 
@@ -54,7 +51,7 @@ describe Oystercard do
 
   before(:each) do
     subject.top_up(10)
-    subject.touch_in(station)
+    subject.touch_in(station, journey)
   end
 
     it "on touch out it should charge the card the minimum fare" do
@@ -73,7 +70,7 @@ describe Oystercard do
 
   before(:each) do
     subject.top_up(10)
-    subject.touch_in(station)
+    subject.touch_in(station, journey)
   end
 
     it "should be able to see an updated journey history when we touch in" do
