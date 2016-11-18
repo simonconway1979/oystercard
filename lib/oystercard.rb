@@ -7,9 +7,10 @@ attr_reader :balance, :entry_station, :journey
 MAXIMUM_BALANCE = 90
 MINIMUM_BALANCE = 1
 
-def initialize
+def initialize(journey_klass)
   @balance = 0
   @entry_station
+  @journey = journey_klass
 end
 
 def top_up(amount)
@@ -17,9 +18,9 @@ def top_up(amount)
   @balance += amount
 end
 
-def touch_in(entry_station, journey_klass)
+def touch_in(entry_station)
   fail "You do not have sufficient funds. Please top up your card." if @balance < MINIMUM_BALANCE
-  @journey = journey_klass.new(entry_station)
+  @journey.new(entry_station)
 end
 
 def touch_out(station)
